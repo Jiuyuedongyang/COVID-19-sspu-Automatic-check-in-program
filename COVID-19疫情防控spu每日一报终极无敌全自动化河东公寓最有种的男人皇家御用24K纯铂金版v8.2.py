@@ -303,11 +303,11 @@ def main():  # 主程序
                     print('签到模块运行成功！')
                     send_email_successful()
                     send_SMS_successful()
-                    now_time = get_net_time('second')
+                    now_time = get_net_time('date')
                     print('您在{0}每日一报自动报送成功！'.format(now_time))
                     print('\r您在GMT+08:00中国标准时间{0}每日一报自动报送成功！ 请勿关闭窗口，等待次日报送...'.format(now_time), end='')
                 if flag_successful == 1:
-                    now_time = get_net_time('second')
+                    now_time = get_net_time('date')
                     print('\r当前时间:GMT+08:00中国标准时间{0}每日一报自动报送成功！ 请勿关闭窗口，等待次日报送...'.format(now_time), end='')
         
         
@@ -320,7 +320,7 @@ def main():  # 主程序
             driver.close()
             
             if flag_failed == 1 and count_failed <= 2:
-                now_time = get_net_time('second')
+                now_time = get_net_time('date')
                 if count_print < 2:
                     count_print = count_print + 1
                     print(
@@ -331,7 +331,7 @@ def main():  # 主程序
                         '\rGMT+08:00中国标准时间{0} 第{1}次报送失败。'.format(
                             now_time, count_failed), end='')
             if count_failed == 3:
-                now_time = get_net_time('second')
+                now_time = get_net_time('date')
                 print(
                     '\rGMT+08:00中国标准时间{0} 第3次报送失败。'.format(
                         now_time))
