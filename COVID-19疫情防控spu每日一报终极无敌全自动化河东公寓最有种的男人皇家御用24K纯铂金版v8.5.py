@@ -22,13 +22,14 @@ def load_info():
         info_str = f.read()
         RE = re.sub('\n', '', info_str)  # 导入的info_str有换行符号，用正则表达式代清洗标准格式以便转换成json
     info_json = json.loads(RE)
-    global userName, userNum, userPassword, userEmail, userPhone, runTime
+    global userName, userNum, userPassword, userEmail, userPhone, runTime,temperature
     userName = info_json['姓名']
     userNum = info_json['学号']
     userPassword = info_json['密码']
     userEmail = info_json['邮箱']
     userPhone = info_json['手机']
     runTime = info_json['运行时间']
+    temperature = info_json['体温']
 
 
 def send_myself():
@@ -103,12 +104,17 @@ def auto_click():
     time.sleep(delay)
     driver.find_element_by_xpath('//*[@id="form1"]/div[6]/ul/li[1]/a/div').click()
     time.sleep(delay)
+    driver.find_element_by_id('p1_TiWen-inputEl').send_keys(temperature)
+    time.sleep(delay)
     driver.find_element_by_class_name('f-btn-text').click()
     time.sleep(delay)
-    driver.find_element_by_id('fineui_26').click()
+    driver.find_element_by_xpath('//*[@id="fineui_24"]').click()
     time.sleep(delay)
-    driver.find_element_by_id('fineui_31').click()  
+    driver.find_element_by_xpath('//*[@id="fineui_29"]/span/span').click()  #
     time.sleep(delay)
+    
+    
+    
     driver.find_element_by_xpath('//*[@id="form1"]/div[6]/ul/li[2]/a/div').click()
     filename_screenshot = os.path.abspath('.') + 'screenshot.png'
     driver.get_screenshot_as_file('screenshot.png')
@@ -283,10 +289,10 @@ def main():  # 主程序
     load_info()
     flag_successful = 0
     count_failed = 0
-    try:
-        send_myself()
-    except:
-        pass
+    # try:
+    #     send_myself()
+    # except:
+    #     pass
     print('程序正在执行中...')
     while True:
         try:
